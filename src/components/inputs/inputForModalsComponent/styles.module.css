@@ -1,0 +1,61 @@
+.styleP {
+    color: var(--Gray-700, #344054);
+    font-family: "Nunito";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.styleInput,
+.erroStyleInput {
+    display: flex;
+    width: 30em;
+    height: 1em;
+    padding: 10px 0px 10px 10px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+
+    border-radius: 8px;
+    border: 1px solid var(--Gray-300, #D0D5DD);
+    background: var(--White, #FFF);
+
+    /* Shadow/xs */
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: "Nunito";
+    font-size: 15px;
+    font-style: normal;
+}
+
+.styleInput::placeholder {
+    color: var(--Cinzas-Cinza-4, #9B9BB2);
+    font-family: "Nunito";
+    font-size: 16px;
+    font-style: normal;
+    /* 150% */
+}
+
+.styleInput:focus {
+    border-color: #DA0175;
+    box-shadow: 0 0 5px #DA0175;
+    outline: none;
+}
+
+.erroStyleInput {
+    border: 1px solid #E70000;
+}
+
+.forms input:nth-last-of-type(1) {
+    margin-bottom: 73px;
+}
+
+.styleConteiner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    align-self: stretch;
+}

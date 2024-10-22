@@ -1,0 +1,40 @@
+.styleBackground {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(153, 4%, 59%, 0.3);
+    z-index: 10;
+}
+
+.styleModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFF;
+    border-radius: 30px;
+    padding: 150px 150px 150px 150px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+.image {
+    width: 30%;
+    height: 30%;
+}
+
+.title {
+    color: var(--Cinzas-Cinza-1, #343447);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+    /* 31.2px */
+}

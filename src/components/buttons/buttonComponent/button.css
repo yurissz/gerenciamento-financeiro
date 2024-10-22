@@ -1,0 +1,20 @@
+.customButton {
+    display: flex;
+    width: 160px;
+    padding: 4px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    background: var(--principais-rosa-normal, #DA0175);
+    border: none;
+
+    color: var(--Cinzas-Cinza-8, #F8F8F9);
+    font-family: "Nunito";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

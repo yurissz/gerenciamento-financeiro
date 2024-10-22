@@ -1,0 +1,58 @@
+.conteiner {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.stylePrincipalConteiner {
+    background: #FFF;
+    border-radius: 64px;
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table td {
+    padding: 16px;
+    text-align: center;
+    border-top: 1px solid hsla(233, 30%, 95%, 1);
+
+}
+
+.table th {
+    padding: 20px;
+    font-size: 18px;
+}
+
+
+.alingItens {
+    background-color: #fff;
+}
+
+.styleItens {
+    font-family: "Nunito", sans-serif;
+    color: #3F3F55;
+}
+
+.styleClassification {
+    font-family: "Nunito", sans-serif;
+    color: #3F3F55;
+    font-size: 18px;
+}
+
+.conteinerStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.styleButtonText {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+}

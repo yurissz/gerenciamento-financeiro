@@ -1,0 +1,47 @@
+.styleConteiner {
+    display: flex;
+    width: 21%;
+    height: 5rem;
+    padding: 23px 40px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background-color: #FFF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.text {
+    color: #3F3F55;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.number {
+    color: #3F3F55;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.alingSegundaryConteiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 60px;
+}
+
+.image {
+    padding-top: 1rem;
+    height: auto;
+    width: 50px;
+    object-fit: contain;
+}

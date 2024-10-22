@@ -1,0 +1,127 @@
+.conteiner {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    filter: drop-shadow(0px 4px 4px rgba(172, 217, 197, 0.25));
+}
+
+.header {
+    background: #FFF;
+    width: auto;
+    height: 15%;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid hsla(233, 30%, 95%, 1);
+
+    border-radius: 32px 32px 0 0;
+    padding: 5% 0;
+
+}
+
+
+.text {
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: "Montserrat";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+    /* 23.4px */
+}
+
+.conteinerNumber {
+    display: inline-flex;
+    padding: 0px 15px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    background: #FFEFEF;
+}
+
+.styleNumberCobrancas {
+    color: #971D1D;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+}
+
+.stylePrincipalConteiner {
+    display: flex;
+    width: auto;
+    height: 100%;
+    flex-direction: column;
+
+    background: #FFF;
+}
+
+.alingClassification {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: auto;
+    padding-bottom: 10%;
+    padding-top: 10%;
+    border-bottom: 1px solid hsla(233, 30%, 95%, 1);
+}
+
+.alingItens {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 50px;
+    gap: 20px;
+    width: auto;
+    padding-bottom: 4.5%;
+    padding-top: 4.5%;
+    border-bottom: 1px solid hsla(233, 30%, 95%, 1);
+}
+
+.styleClassification {
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: "Nunito";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.08px;
+}
+
+.styleItens {
+    color: var(--Neutrals-Dark-medium, #6E6E85);
+    font-family: Nunito;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.07px;
+}
+
+.styleFooter {
+    background: #FFF;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid hsla(233, 30%, 95%, 1);
+    border-radius: 0 0 24px 24px;
+}
+
+.textFooter {
+    padding: 15px 0;
+
+    color: var(--principais-rosa-normal, #DA0175);
+    font-family: Nunito;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 23.4px */
+    text-decoration-line: underline;
+    color: hsla(328, 99%, 43%, 1);
+}

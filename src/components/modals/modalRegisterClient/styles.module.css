@@ -1,0 +1,75 @@
+.styleBackground {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(153, 4%, 59%, 0.3);
+    z-index: 10;
+}
+
+.styleModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFF;
+    border-radius: 30px;
+    padding: 20px 50px 50px 50px;
+}
+
+.styleHeader div h1 {
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: Montserrat;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    /* 33.8px */
+}
+
+.styleHeader div {
+    display: flex;
+    gap: 16px;
+}
+
+.styleHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.alingSpaces {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
+.alingErrors {
+    display: flex;
+    flex-direction: column;
+}
+
+.styleCancelButton {
+    width: 231.5px;
+    height: 34px;
+
+    display: inline-flex;
+    padding: 4px 81.5px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+
+    border-radius: 10px;
+    border: 1px solid var(--Cinzas-Cinza-6, #DEDEE9);
+    background: var(--Cinzas-Cinza-8, #F8F8F9);
+}
+
+.errorText {
+    color: var(--feedback-erro-normal, #E70000);
+    font-family: Nunito;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

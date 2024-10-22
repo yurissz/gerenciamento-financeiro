@@ -1,0 +1,126 @@
+.styleBackground {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(153, 4%, 59%, 0.3);
+    z-index: 10;
+}
+
+.styleModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFF;
+    border-radius: 30px;
+    padding: 20px 50px 50px 50px;
+}
+
+.styleHeader div h1 {
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: Montserrat;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    /* 33.8px */
+}
+
+.styleHeader div {
+    display: flex;
+    gap: 16px;
+}
+
+.styleHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.alingSpaces {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
+.alingErrors {
+    display: flex;
+    flex-direction: column;
+}
+
+.styleCancelButton {
+    width: 231.5px;
+    height: 34px;
+
+    display: inline-flex;
+    padding: 4px 81.5px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+
+    border-radius: 10px;
+    border: 1px solid var(--Cinzas-Cinza-6, #DEDEE9);
+    background: var(--Cinzas-Cinza-8, #F8F8F9);
+}
+
+.styleConteinerInputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    align-self: stretch;
+}
+
+.styleLabelNome {
+    color: var(--Gray-700, #344054);
+    font-family: "Nunito";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+
+.styleLabelSelect {
+    display: flex;
+    width: 25em;
+    padding: 14px 28px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+
+    border-radius: 8px;
+    border: 1px solid #F0F0F5;
+    background: #F0F0F5;
+    margin-top: 5px;
+
+    /* Shadow/xs */
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: "Nunito";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.styleItens {
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: "Nunito";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+}
+
+.conteinerStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 5px;
+}

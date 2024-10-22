@@ -1,0 +1,23 @@
+.styleConteiner {
+    width: 25%;
+    height: 50%;
+    flex-shrink: 0;
+
+    display: inline-flex;
+    padding: 8px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    border-radius: 8px;
+    background: #FFF;
+}
+
+.styleText {
+    color: var(--Cinzas-Cinza-3, #747488);
+    font-family: Nunito;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}

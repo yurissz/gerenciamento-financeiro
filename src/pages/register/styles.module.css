@@ -1,0 +1,145 @@
+.screenBackground {
+    background: var(--Cinzas-Cinza-8, #F8F8F9);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+
+.screenLateral {
+    background: var(--Cinzas-Cinza-7, #F0F0F5);
+    height: 100vh;
+    width: 33.3vw;
+}
+
+.alingConteiners {
+    display: flex;
+    gap: 5%;
+}
+
+.alingTitle {
+    margin-top: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14%;
+}
+
+.alingPicture {
+    margin-left: 10%;
+    margin-top: 30%;
+}
+
+.styleLateralBigName {
+    color: var(--principais-verde-normal, #0E8750);
+    font-family: "Montserrat", system-ui;
+    font-size: 1.3em;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+}
+
+.styleLateralLowName {
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: 'Nunito';
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+}
+
+
+.formAling {
+    margin-left: 16%;
+    margin-top: 8%;
+}
+
+.pageTitle {
+    color: var(--Cinzas-Cinza-1, #343447);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 1.5em;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+}
+
+.styleFacaSeuLogin {
+    color: var(--Cinzas-Cinza-2, #3F3F55);
+    font-family: Nunito;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 23.4px */
+
+    margin-left: 12%;
+    margin-top: 5%;
+}
+
+.styleProgressBar {
+    margin-top: 50%;
+    margin-left: 12%;
+}
+
+.styleLogin {
+    color: var(--principais-rosa-normal, #DA0175);
+    font-family: Nunito;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    text-decoration-line: underline;
+}
+
+.styleTextLogin {
+    color: var(--principais-rosa-normal, #DA0175);
+    font-family: Nunito;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    text-decoration-line: underline;
+}
+
+.modalConfirmed {
+    width: 600px;
+    height: 512px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: var(--Cinzas-Cinza-7, #F0F0F5);
+
+
+}
+
+.styleTextCadastroSucess {
+    color: var(--Cinzas-Cinza-1, #343447);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+    /* 31.2px */
+}
+
+.alingImageCheck {
+    width: 104px;
+    height: 104px;
+    padding-top: 25%;
+    padding-left: 40%;
+    padding-bottom: 5%;
+}
+
+.alingItensModal {
+    display: flex;
+    flex-direction: column;
+}
+
+.errorText {
+    color: var(--feedback-erro-normal, #E70000);
+    font-family: Nunito;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
