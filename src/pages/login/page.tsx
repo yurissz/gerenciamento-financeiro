@@ -32,7 +32,6 @@ export default function SingIn() {
                 email: inputValue.email,
                 senha: inputValue.password,
             });
-            console.log(data);
 
             if (data) {
                 localStorage.setItem('token', data.token);

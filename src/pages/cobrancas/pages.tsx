@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom'
 import { EditAndLogoutModal } from '../../components/buttons/buttonEditAndLogOutUser/EditAndLogoutModal'
 import { ModalEditUser } from '../../components/modals/modalEditUser/ModalEditUser'
 import { ModalEditConfirm } from '../../components/modals/modalEditConfirm/modalEditConfirm'
-import { ModalDetalheCharge } from '../../components/modals/modalDetalheCharge/ModalDetalheCharge'
 
 export default function UserCobrancas() {
     const navigate = useNavigate()
@@ -22,16 +21,21 @@ export default function UserCobrancas() {
     const [isOpenUserButton, setIsOpenUserButton] = useState(false)
     const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false)
     const [isConfirmedEdit, setIsConfirmedEdit] = useState(false)
-    const [userName, setUserName] = useState("")
+    // const [userName, setUserName] = useState("")
     const [isOpenDescriptionChargeModal, setIsOpenDescriptionChargeModal] = useState(false)
 
     const [idCob, setIdCob] = useState("")
     const [isOpenEditCharge, setIsOpenEditCharge] = useState(false)
     const [isOpenDeleteAlart, setIsOpenDeleteAlart] = useState(false)
 
-    let user = localStorage.getItem("user")
-    if (user == null) return
-    user = JSON.parse(user)
+    // interface User {
+    //     id: number;
+    //     nome: string;
+    // }
+
+    // let localStorageUser = localStorage.getItem("user");
+    //if (localStorageUser == null) return;
+    // const user: User = JSON.parse(localStorageUser);
 
 
     const [charges, setCharges] = useState([
@@ -51,32 +55,28 @@ export default function UserCobrancas() {
     const getCharges = async () => {
         try {
             const { data } = await api.get('/allCharges')
-            console.log(data);
 
             if (data) {
                 setCharges(data)
             }
 
         } catch (error) {
-            console.log(error);
         }
     }
 
-    const getUser = async () => {
-        try {
-            const { data } = await api.get(`/userDetails/${user.id}`);
-            console.log(data.user.nome);
-            setUserName(data.user.nome)
+    // const getUser = async () => {
+    //     try {
+    //         const { data } = await api.get(`/userDetails/${user.id}`);
+    //         setUserName(data.user.nome)
 
-        } catch (error) {
-            console.log(error);
+    //     } catch (error) {
 
-        }
-    }
+    //     }
+    // }
 
     useEffect(() => {
         getCharges()
-        getUser()
+        // getUser()
         console.log("oi");
 
 
@@ -108,7 +108,7 @@ export default function UserCobrancas() {
                     <section className={styles.alingUserImage} onClick={isOpenUserButton ? () => setIsOpenUserButton(false) : () => setIsOpenUserButton(true)}>
                         <img src={perfilIcon} alt={"perfilIcon"}></img>
                         <div className={styles.alingUserName}>
-                            <p className={styles.styleUserName}>{userName}</p>
+                            <p className={styles.styleUserName}>{"Perfil"}</p>
                             <img src={chevronDown} alt={"chevronDown"}></img>
                         </div>
                         {isOpenUserButton && <EditAndLogoutModal style={{ position: "relative", top: "4em", right: "1em" }} setIsOpen={setIsOpenUserButton} setModalEditUser={setIsOpenModalEditUser}></EditAndLogoutModal>}

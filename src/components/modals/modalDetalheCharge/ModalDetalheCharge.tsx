@@ -13,16 +13,16 @@ interface ModalProps {
     id_cob?: string,
 }
 
-export const ModalDetalheCharge = ({ isOpen, setIsOpen, id_cob }: ModalProps) => {
+export const ModalDetalheCharge = ({ setIsOpen, id_cob }: ModalProps) => {
 
     const [clientName, setClientName] = useState("")
     const [chargeDescription, setChargeDescription] = useState("")
     const [chargeVencimento, setChargeVencimento] = useState("")
-    const [chargeValue, setChargeValue] = useState("")
-    const [chargeID, setChargeID] = useState(id_cob)
+    const [chargeValue, setChargeValue] = useState(0)
+    const [chargeID] = useState(id_cob)
     const [chargeStatus, setChargeStatus] = useState("")
 
-    const searchChargeDescription = async (id_cob: string) => {
+    const searchChargeDescription = async (id_cob: string | undefined) => {
         try {
             const { data } = await api.get(`/chargeDetails/${id_cob}`)
             setClientName(data.cliente_nome)
@@ -30,11 +30,8 @@ export const ModalDetalheCharge = ({ isOpen, setIsOpen, id_cob }: ModalProps) =>
             setChargeVencimento(data.data_venc)
             setChargeValue(data.valor)
             setChargeStatus(data.status)
-            console.log(data);
 
         } catch (error) {
-            console.log(error.message);
-
         }
     }
 
@@ -51,7 +48,11 @@ export const ModalDetalheCharge = ({ isOpen, setIsOpen, id_cob }: ModalProps) =>
                         <img src={modalChargeIcon} alt="modalClientIcon" />
                         <h1>Detalhe da Cobrança</h1>
                     </div>
-                    <img src={close} alt="closeIcon" onClick={() => setIsOpen(false)} />
+                    <img src={close} alt="closeIcon" onClick={() => {
+                        if (setIsOpen) {
+                            setIsOpen(false);
+                        }
+                    }} />
                 </header>
                 <div>
                     <div className={styles.styleConteinerInputs} style={{ paddingTop: "15px" }}>

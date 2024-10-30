@@ -4,8 +4,7 @@ import pen from '../../assets/cobrancas/pen.png'
 import setas from '../../assets/cobrancas/setas.png'
 import { IChargesCobrancasPage } from '../../interfaces/charges'
 import { formatarParaReais } from '../../utils/formatToReais'
-import { formatDate } from '../../utils/formatToDate'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { ModalEditCharge } from '../modals/modalEditCharge/ModalEditCharge'
 import { ModalDeleteCharge } from '../modals/modalDeleteCharge/ModalDeleteCharge'
 import { ModalDetalheCharge } from '../modals/modalDetalheCharge/ModalDetalheCharge'
@@ -25,7 +24,7 @@ interface CobrancasProps {
     setIsOpenRegisterCharge: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export const CobrancasDoCliente: React.FC<CobrancasProps> = ({ style, onClick, arrayCharges, idCob, setIdCob,
+export const CobrancasDoCliente: React.FC<CobrancasProps> = ({ style, arrayCharges, idCob, setIdCob,
     isOpenDeleteAlart, setIsOpenDeleteAlart, isOpenEditCharge, setIsOpenEditCharge,
     setIsOpenDescriptionChargeModal, isOpenDescriptionChargeModal,
     setIsOpenRegisterCharge
@@ -48,7 +47,6 @@ export const CobrancasDoCliente: React.FC<CobrancasProps> = ({ style, onClick, a
 
     useEffect(() => {
         setIdCob(idCob)
-        console.log(idCob);
     }, [idCob])
 
     return (

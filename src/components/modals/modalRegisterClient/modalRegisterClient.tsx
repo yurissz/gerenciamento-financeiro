@@ -3,13 +3,11 @@ import modalClientIcon from '../../../assets/clients/modalClientsIcon.png'
 import close from '../../../assets/clients/close.png'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../buttons/buttonComponent/Button';
 import api from '../../../services/api';
 import { IClientsForm } from '../../../interfaces/clients';
 import ModalInput from '../../inputs/inputForModalsComponent/ModalInput';
-import { useState } from 'react';
 
 const schema = yup.object({
     nome: yup.string().required('Este campo deve ser preenchido'),
@@ -30,7 +28,7 @@ interface ModalProps {
 }
 
 
-export const ModalRegisterClient = ({ isOpen, setIsOpen }: ModalProps) => {
+export const ModalRegisterClient = ({ setIsOpen }: ModalProps) => {
 
     const {
         register,
@@ -42,7 +40,7 @@ export const ModalRegisterClient = ({ isOpen, setIsOpen }: ModalProps) => {
 
     const handleForm = async (inputValue: IClientsForm) => {
         try {
-            const { data } = await api.post('/registerClient', {
+            await api.post('/registerClient', {
                 nome: inputValue.nome,
                 email: inputValue.email,
                 cpf: inputValue.cpf,
@@ -55,9 +53,7 @@ export const ModalRegisterClient = ({ isOpen, setIsOpen }: ModalProps) => {
                 uf: inputValue.uf
             });
             setIsOpen(false)
-            if (data) {
-                console.log(data);
-            }
+
 
         } catch (error) {
             alert('Ocorreu um erro');

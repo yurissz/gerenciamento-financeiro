@@ -17,9 +17,8 @@ export interface IChargesCobrancasPage {
 }
 
 export interface IAddCharge {
-    cliente_id: string,
-    descricao: string,
-    data_venc: Date,
-    valor: number,
-    status: string
+    descricao: string;
+    data_venc: string; // Mantenha como string
+    valor: string;
+    status: string;
 }

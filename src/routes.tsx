@@ -4,7 +4,6 @@ import Login from "./pages/login/page";
 import Home from "./pages/home/page";
 import UserCobrancas from "./pages/cobrancas/pages";
 import SingUpPassword from "./pages/register-password/page";
-import { createRequest } from "./utils/createRequest"
 import UserClients from "./pages/clientes/page";
 
 const ProtectedRoutes = () => {

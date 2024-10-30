@@ -1,15 +1,13 @@
-import styles from './styles.module.css'
-import modalChargeIcon from '../../../assets/cobrancas/past.png'
-import close from '../../../assets/clients/close.png'
+import styles from './styles.module.css';
+import modalChargeIcon from '../../../assets/cobrancas/past.png';
+import close from '../../../assets/clients/close.png';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../../buttons/buttonComponent/Button';
 import api from '../../../services/api';
-import { IAddCharge } from '../../../interfaces/charges';
 import { useEffect, useState } from 'react';
 
-// falta fazer
 const schema = yup.object({
     descricao: yup.string().required('Este campo deve ser preenchido'),
     data_venc: yup.string().required('Este campo deve ser preenchido'),
@@ -17,78 +15,69 @@ const schema = yup.object({
 });
 
 interface ModalProps {
-    isOpen?: boolean,
-    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
-    id_cob?: string,
+    isOpen?: boolean;
+    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+    id_cob: string;
 }
 
-export const ModalEditCharge = ({ isOpen, setIsOpen, id_cob }: ModalProps) => {
+interface IFormInput {
+    descricao: string;
+    data_venc: string;
+    valor: string;
+}
 
-    const [clientName, setClientName] = useState("")
-    const [chargeStatus, setChargeStatus] = useState("")
+export const ModalEditCharge = ({ setIsOpen, id_cob }: ModalProps) => {
+    const [clientName, setClientName] = useState<string>("");
+    const [chargeStatus, setChargeStatus] = useState<string>("");
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
+    } = useForm<IFormInput>({
         resolver: yupResolver(schema),
     });
 
-
     const searchClientName = async (id_cob: string) => {
         try {
-            const { data } = await api.get(`/chargeDetails/${id_cob}`)
-            setClientName(data.cliente_nome)
-            setChargeStatus(data.status)
-            console.log(data);
-
+            const { data } = await api.get(`/chargeDetails/${id_cob}`);
+            setClientName(data.cliente_nome);
+            setChargeStatus(data.status);
         } catch (error) {
-            console.log(error.message);
-
         }
-    }
+    };
 
-
-
-    const handleForm = async (inputValue: IAddCharge) => {
-
+    const handleForm: SubmitHandler<IFormInput> = async (inputValue) => {
         try {
+            const clientes = await api.get(`/consultClient`);
+            const clienteSelecionado = clientes.data.find((cliente: any) => cliente.nome === clientName);
 
-            const clientes = await api.get(`/consultClient`)
-            const clienteSelecionado = clientes.data.filter((cliente) => cliente.nome === clientName)
+            if (!clienteSelecionado) {
+                alert("Cliente não encontrado");
+                return;
+            }
 
-            const cliente_id = clienteSelecionado[0].id
+            const cliente_id = clienteSelecionado.id;
 
-            console.log(cliente_id);
-
-
-            const { data } = await api.put("/updateCharge", {
+            await api.put("/updateCharge", {
                 cliente_id: cliente_id,
                 id_cob: id_cob,
                 descricao: inputValue.descricao,
                 data_venc: inputValue.data_venc,
                 valor: inputValue.valor,
-                status: chargeStatus
+                status: chargeStatus,
             });
-            console.log(data);
-            setIsOpen(false)
+            if (setIsOpen) {
+                setIsOpen(false);
+            }
         } catch (error) {
-            console.log(error);
-
             alert('Ocorreu um erro');
         }
     };
 
-
-
-
     useEffect(() => {
-        searchClientName(id_cob)
-    }, [])
-
-
-
+        searchClientName(id_cob);
+    }, [id_cob]);
 
     return (
         <div className={styles.styleBackground}>
@@ -98,7 +87,7 @@ export const ModalEditCharge = ({ isOpen, setIsOpen, id_cob }: ModalProps) => {
                         <img src={modalChargeIcon} alt="modalClientIcon" />
                         <h1>Edição de Cobrança</h1>
                     </div>
-                    <img src={close} alt="closeIcon" onClick={() => setIsOpen(false)} />
+                    <img src={close} alt="closeIcon" onClick={() => setIsOpen && setIsOpen(false)} />
                 </header>
                 <div>
                     <form onSubmit={handleSubmit(handleForm)}>
@@ -147,7 +136,7 @@ export const ModalEditCharge = ({ isOpen, setIsOpen, id_cob }: ModalProps) => {
                             display: "flex"
                         }}>
                             <Button
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => setIsOpen && setIsOpen(false)}
                                 type={"reset"}
                                 style={{
                                     color: "#0E8750",
@@ -169,4 +158,4 @@ export const ModalEditCharge = ({ isOpen, setIsOpen, id_cob }: ModalProps) => {
             </section >
         </div >
     )
-}
+};

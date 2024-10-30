@@ -1,5 +1,5 @@
 import styles from './styles.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 
 interface ClientDataProps {
@@ -27,7 +27,7 @@ interface ClientDataProps {
 }
 
 
-export const ClientData: React.FC<ClientDataProps> = ({ style, idCob, setIdCob, clientId, detail,
+export const ClientData: React.FC<ClientDataProps> = ({ style, idCob, setIdCob, detail,
     isOpenDetailClientPage, setIsOpenEditClient
 }) => {
 

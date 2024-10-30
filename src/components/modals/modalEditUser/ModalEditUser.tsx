@@ -13,17 +13,15 @@ const schema = yup.object({
     cpf: yup.string().required("Este campo deve ser preenchido"),
     senha: yup.string().required("Este campo deve ser preenchido"),
     telefone: yup.string().required("Este campo deve ser preenchido"),
-    confirmSenha: yup.string().required("Este campo deve ser preenchido").oneOf([yup.ref('senha'), null], 'As senhas devem coincidir')
+    confirmSenha: yup.string().required("Este campo deve ser preenchido").oneOf([yup.ref('senha')], 'As senhas devem coincidir')
 });
 
 interface ModalProps {
-    isOpen?: boolean,
-    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
-    setIsEditSucess?: React.Dispatch<React.SetStateAction<boolean>>
-    id_cob?: string
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setIsEditSucess: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const ModalEditUser = ({ isOpen, setIsOpen, id_cob, setIsEditSucess }: ModalProps) => {
+export const ModalEditUser = ({ setIsOpen, setIsEditSucess }: ModalProps) => {
 
     const {
         register,
@@ -35,18 +33,16 @@ export const ModalEditUser = ({ isOpen, setIsOpen, id_cob, setIsEditSucess }: Mo
 
     const handleForm = async (inputValue: IeditUser) => {
         try {
-            const { data } = await api.put("/updateUser", {
+            await api.put("/updateUser", {
                 nome: inputValue.nome,
                 email: inputValue.email,
                 cpf: inputValue.cpf,
                 telefone: inputValue.telefone,
                 senha: inputValue.senha,
             });
-            console.log(data);
             setIsOpen(false)
             setIsEditSucess(true)
         } catch (error) {
-            console.log(error);
 
             alert('Ocorreu um erro');
         }

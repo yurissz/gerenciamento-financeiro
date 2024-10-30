@@ -1,6 +1,6 @@
-import styles from './styles.module.css'
-import modalChargeIcon from '../../../assets/cobrancas/past.png'
-import close from '../../../assets/clients/close.png'
+import styles from './styles.module.css';
+import modalChargeIcon from '../../../assets/cobrancas/past.png';
+import close from '../../../assets/clients/close.png';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from 'react-hook-form';
@@ -17,41 +17,35 @@ const schema = yup.object({
 });
 
 interface ModalProps {
-    isOpen?: boolean,
-    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>,
-    clientId?: number
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    clientId: number; // Tornar obrigatório
 }
 
-export const ModalRegisterCharge = ({ isOpen, setIsOpen, clientId }: ModalProps) => {
-    // const navigate = useNavigate();
-
-    const [clientName, setClientName] = useState("")
+export const ModalRegisterCharge: React.FC<ModalProps> = ({ setIsOpen, clientId }) => {
+    const [clientName, setClientName] = useState("");
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
+    } = useForm<IAddCharge>({
         resolver: yupResolver(schema),
     });
 
     const searchClientName = async () => {
-        const clientes = await api.get("/consultClient")
-        const clienteSelecionado = clientes.data.filter((cliente) => cliente.id === clientId)
+        try {
+            const response = await api.get("/consultClient");
+            const clienteSelecionado = response.data.find((cliente: any) => cliente.id === clientId); // Use 'find' para obter um único cliente
 
-        console.log(clienteSelecionado);
-
-        const cliente_name = clienteSelecionado[0].nome
-
-        setClientName(cliente_name)
-
-    }
+            if (clienteSelecionado) {
+                setClientName(clienteSelecionado.nome);
+            }
+        } catch (error) {
+        }
+    };
 
     const handleForm = async (inputValue: IAddCharge) => {
         try {
-
-            setIsOpen(false)
-
             const { data } = await api.post("/addCharge", {
                 cliente_id: clientId,
                 descricao: inputValue.descricao,
@@ -59,20 +53,18 @@ export const ModalRegisterCharge = ({ isOpen, setIsOpen, clientId }: ModalProps)
                 valor: inputValue.valor,
                 status: inputValue.status
             });
-            if (data) {
-                console.log(data);
-            }
-        } catch (error) {
-            console.log(error.response.data.mensagem);
 
+            if (data) {
+            }
+            setIsOpen(false);
+        } catch (error) {
             alert('Ocorreu um erro');
         }
     };
 
-
     useEffect(() => {
-        searchClientName()
-    }, [])
+        searchClientName();
+    }, [clientId]);
 
     return (
         <div className={styles.styleBackground}>
@@ -87,64 +79,97 @@ export const ModalRegisterCharge = ({ isOpen, setIsOpen, clientId }: ModalProps)
                 <div>
                     <form onSubmit={handleSubmit(handleForm)}>
                         <div className={styles.styleConteinerInputs} style={{ paddingTop: "15px" }}>
-                            <label htmlFor="" className={styles.styleLabelNome}>Nome*</label>
-                            <input value={clientName} className={styles.styleInputNome} placeholder={"Digite o nome"} />
+                            <label className={styles.styleLabelNome}>Nome*</label>
+                            <input
+                                value={clientName}
+                                className={styles.styleInputNome}
+                                placeholder="Digite o nome"
+                                readOnly // O nome do cliente é somente leitura
+                            />
                         </div>
                         <div className={styles.styleConteinerInputs} style={{ paddingTop: "15px" }}>
-                            <label htmlFor="" className={styles.styleLabelNome}>Descrição*</label>
-                            <textarea {...register("descricao")} className={`${errors.descricao?.message ? styles.erroStyleInput : styles.styleInputNome}`} placeholder={"Digite a descrição"} />
+                            <label className={styles.styleLabelNome}>Descrição*</label>
+                            <textarea
+                                {...register("descricao")}
+                                className={`${errors.descricao ? styles.erroStyleInput : styles.styleInputNome}`}
+                                placeholder="Digite a descrição"
+                            />
                             <p className={styles.errorText}>{errors.descricao?.message}</p>
                         </div>
                         <div className={styles.alingSpaces}>
                             <div className={styles.alingErrors}>
                                 <div className={styles.styleConteinerInputs} style={{ paddingTop: "15px" }}>
-                                    <label htmlFor="" className={styles.styleLabelNome}>Vencimento*</label>
-                                    <input type={"date"} {...register("data_venc")} className={`${errors.descricao?.message ? styles.erroStyleInput : styles.styleInputNome}`} placeholder={"Data de Vencimento"} style={{ width: "12em" }} />
+                                    <label className={styles.styleLabelNome}>Vencimento*</label>
+                                    <input
+                                        type="date"
+                                        {...register("data_venc")}
+                                        className={`${errors.data_venc ? styles.erroStyleInput : styles.styleInputNome}`}
+                                        placeholder="Data de Vencimento"
+                                        style={{ width: "12em" }}
+                                    />
                                     <p className={styles.errorText}>{errors.data_venc?.message}</p>
                                 </div>
                             </div>
                             <div className={styles.styleConteinerInputs} style={{ paddingTop: "15px" }}>
-                                <label htmlFor="" className={styles.styleLabelNome}>Valor*</label>
-                                <input type={"text"} {...register("valor")} className={`${errors.descricao?.message ? styles.erroStyleInput : styles.styleInputNome}`} placeholder={"Digite o valor"} style={{ width: "12em" }} />
+                                <label className={styles.styleLabelNome}>Valor*</label>
+                                <input
+                                    type="text"
+                                    {...register("valor")}
+                                    className={`${errors.valor ? styles.erroStyleInput : styles.styleInputNome}`}
+                                    placeholder="Digite o valor"
+                                    style={{ width: "12em" }}
+                                />
                                 <p className={styles.errorText}>{errors.valor?.message}</p>
                             </div>
                         </div>
                         <div className={styles.styleConteinerInputs} style={{ paddingTop: "15px" }}>
-                            <label htmlFor="" className={styles.styleLabelNome}>Status*</label>
+                            <label className={styles.styleLabelNome}>Status*</label>
                             <label className={styles.styleLabelSelect}>
-                                <input className={styles.styleInputSelect} type={"radio"} value={"Paga"} {...register("status")} />
+                                <input
+                                    className={styles.styleInputSelect}
+                                    type="radio"
+                                    value="Paga"
+                                    {...register("status")}
+                                />
                                 Cobrança Paga
                             </label>
                             <label className={styles.styleLabelSelect}>
-                                <input className={styles.styleInputSelect} type={"radio"} value={"Pendente"} {...register("status")} />
+                                <input
+                                    className={styles.styleInputSelect}
+                                    type="radio"
+                                    value="Pendente"
+                                    {...register("status")}
+                                />
                                 Cobrança Pendente
                             </label>
                             <p className={styles.errorText}>{errors.status?.message}</p>
                         </div>
-                        <div style={{
-                            display: "flex"
-                        }}>
+                        <div style={{ display: "flex" }}>
                             <Button
+                                type="reset" // Mudar para type="button"
                                 onClick={() => setIsOpen(false)}
-                                type={"reset"}
                                 style={{
                                     color: "#0E8750",
                                     background: "#F8F8F9",
                                     border: "1px solid #DEDEE9",
                                     marginTop: "4%",
                                     width: "42%"
-                                }}>Cancelar</Button>
+                                }}>
+                                Cancelar
+                            </Button>
                             <Button
-                                type={"submit"}
+                                type="submit"
                                 style={{
                                     marginTop: "4%",
                                     width: "42%",
                                     marginLeft: "16%",
-                                }}>Aplicar</Button>
+                                }}>
+                                Aplicar
+                            </Button>
                         </div>
                     </form>
                 </div>
-            </section >
-        </div >
-    )
+            </section>
+        </div>
+    );
 }

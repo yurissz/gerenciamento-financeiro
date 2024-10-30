@@ -3,14 +3,13 @@ import houseIcon from '../../assets/home/houseIcon.png'
 import clientsIcon from '../../assets/clients/clientsSelected.png'
 import perfilIcon from '../../assets/home/perfilIcon.png'
 import chevronDown from '../../assets/home/chevron-down.png'
-import past from '../../assets/cobrancas/past.png'
 import filter from '../../assets/cobrancas/filter.png'
 import search from '../../assets/cobrancas/search.png'
 import pastIcon from '../../assets/home/pastIcon.png'
 import api from '../../services/api'
 import { useEffect, useState } from 'react'
 import { ClientsPage } from '../../components/clientsPageComponent/ClientsPage'
-import { ModalRegisterClient } from '../../components/modals/modalRegisterClient/ModalRegisterClient'
+import { ModalRegisterClient } from '../../components/modals/modalRegisterClient/modalRegisterClient'
 import { ModalRegisterCharge } from '../../components/modals/modalRegisterCharge/ModalRegisterCharge'
 import { useNavigate } from 'react-router-dom'
 import { EditAndLogoutModal } from '../../components/buttons/buttonEditAndLogOutUser/EditAndLogoutModal'
@@ -28,16 +27,21 @@ export default function UserClients() {
     const navigate = useNavigate()
     const [isOpenUserButton, setIsOpenUserButton] = useState(false)
 
+    // interface User {
+    //     id: number;
+    //     nome: string;
+    // }
 
-    let user = localStorage.getItem("user")
-    if (user == null) return
-    user = JSON.parse(user)
+    // let localStorageUser = localStorage.getItem("user");
+    //if (localStorageUser == null) return;
+    // const user: User = JSON.parse(localStorageUser);
+
 
     const [isOpenAddClientModel, setIsOpenAddClientModel] = useState(false)
     const [isOpenAddChargeModel, setIsOpenAddChargeModel] = useState(false)
     const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false)
     const [isConfirmedEdit, setIsConfirmedEdit] = useState(false)
-    const [userName, setUserName] = useState("")
+    // const [userName, setUserName] = useState("")
 
     const [isOpenDescriptionChargeModal, setIsOpenDescriptionChargeModal] = useState(false)
     const [idCob, setIdCob] = useState("")
@@ -93,28 +97,26 @@ export default function UserClients() {
     const getClients = async () => {
         try {
             const { data } = await api.get('/searchClients')
-            console.log(data);
 
             if (data) {
                 setClients(data)
             }
 
         } catch (error) {
-            console.log(error);
         }
     }
 
-    const getUser = async () => {
-        try {
-            const { data } = await api.get(`/userDetails/${user.id}`);
-            console.log(data.user.nome);
-            setUserName(data.user.nome)
-
-        } catch (error) {
-            console.log(error);
-
-        }
-    }
+    // const getUser = async () => {
+    //     try {
+    //         if (user == null || !user.id) {
+    //             return;
+    //         }
+    //         const { data } = await api.get(`/userDetails/${user.id}`);
+    //         setUserName(data.user.nome);
+    //     } catch (error) {
+    //         console.error("Error fetching user details:", error);
+    //     }
+    // };
 
     const getCharges = async () => {
         try {
@@ -126,22 +128,17 @@ export default function UserClients() {
             const clientId = consultClient[0].id
 
             setClientId(clientId)
-            console.log(clientId);
 
 
             const { data } = await api.get('/allCharges')
-            console.log(data);
 
             const arrayFiltrado = data.filter((charge: IChargesCobrancasPage) => charge.id === clientId)
-            console.log(arrayFiltrado);
             setCharges(arrayFiltrado)
 
             const clientDetails = await api.get(`/clientDetails/${clientId}`)
-            console.log(clientDetails.data.client);
             setDetail(clientDetails.data.client)
 
         } catch (error) {
-            console.log(error);
         }
     }
 
@@ -149,7 +146,7 @@ export default function UserClients() {
 
     useEffect(() => {
         getClients()
-        getUser()
+        // getUser()
         getCharges()
     }, [isOpenModalEditUser, isOpenAddClientModel, isOpenDetailClientPage, isOpenEditClient, isOpenRegisterCharge])
 
@@ -182,7 +179,7 @@ export default function UserClients() {
                         <section className={styles.alingUserImage} onClick={isOpenUserButton ? () => setIsOpenUserButton(false) : () => setIsOpenUserButton(true)}>
                             <img src={perfilIcon} alt={"perfilIcon"}></img>
                             <div className={styles.alingUserName}>
-                                <p className={styles.styleUserName}>{userName}</p>
+                                <p className={styles.styleUserName}>{"Perfil"}</p>
                                 <img src={chevronDown} alt={"chevronDown"}></img>
                             </div>
                             {isOpenUserButton && <EditAndLogoutModal style={{ position: "relative", top: "4em", right: "1em" }} setIsOpen={setIsOpenUserButton} setModalEditUser={setIsOpenModalEditUser}></EditAndLogoutModal>}
@@ -227,7 +224,7 @@ export default function UserClients() {
                         <section className={styles.alingUserImage} onClick={isOpenUserButton ? () => setIsOpenUserButton(false) : () => setIsOpenUserButton(true)}>
                             <img src={perfilIcon} alt={"perfilIcon"}></img>
                             <div className={styles.alingUserName}>
-                                <p className={styles.styleUserName}>{userName}</p>
+                                <p className={styles.styleUserName}>{"Perfil"}</p>
                                 <img src={chevronDown} alt={"chevronDown"}></img>
                             </div>
                             {isOpenUserButton && <EditAndLogoutModal style={{ position: "relative", top: "4em", right: "1em" }}
@@ -247,7 +244,6 @@ export default function UserClients() {
                         </div>
                         {isOpenRegisterCharge &&
                             <ModalRegisterCharge clientId={clientId}
-                                isOpen={isOpenRegisterCharge}
                                 setIsOpen={setIsOpenRegisterCharge}>
                             </ModalRegisterCharge>
                         }

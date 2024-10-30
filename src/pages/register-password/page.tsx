@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 const userSchema = yup.object().shape({
     senha: yup.string().required("Este campo é obrigatório"),
-    confirmSenha: yup.string().required("Este campo é obrigatório").oneOf([yup.ref('password'), null], 'As senhas devem coincidir')
+    confirmSenha: yup.string().required("Este campo é obrigatório").oneOf([yup.ref('password')], 'As senhas devem coincidir')
 })
 
 export default function SingUpPassword() {

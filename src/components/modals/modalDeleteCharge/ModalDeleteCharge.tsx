@@ -10,18 +10,15 @@ interface CobrancasProps {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const ModalDeleteCharge: React.FC<CobrancasProps> = ({ style, onClick, id_cob, setIsOpen }) => {
+export const ModalDeleteCharge: React.FC<CobrancasProps> = ({ id_cob, setIsOpen }) => {
+
     console.log(id_cob);
+
     const deleteCharge = async (id_cob: string) => {
         try {
-
-
-            const deleta = await api.delete(`/deleteCharge/${id_cob}`)
-            console.log(deleta);
-
-
+            await api.delete(`/deleteCharge/${id_cob}`)
         } catch (error) {
-            console.log(error);
+
         }
     }
 

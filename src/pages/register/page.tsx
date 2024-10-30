@@ -14,42 +14,54 @@ import api from "../../services/api";
 import confirmedIcon from '../../assets/home/confirmIcon.png';
 import progresscollum3 from '../../assets/auth/progresscollum3.png'
 
-const userSchema1 = yup.object().shape({
+interface UserFormDataPage1 {
+    name: string;
+    email: string;
+}
+
+interface UserFormDataPage2 {
+    senha: string;
+    confirmSenha: string;
+}
+
+type CurrentSchema = yup.ObjectSchema<UserFormDataPage1> | yup.ObjectSchema<UserFormDataPage2>;
+
+const userSchema1: CurrentSchema = yup.object().shape({
     name: yup.string().required("Este campo é obrigatório"),
     email: yup.string().required("Este campo é obrigatório").email("Precisa ser um email válido"),
 });
 
-const userSchema2 = yup.object().shape({
+const userSchema2: CurrentSchema = yup.object().shape({
     senha: yup.string().required("Este campo é obrigatório"),
-    confirmSenha: yup.string().oneOf([yup.ref('senha'), null], 'As senhas devem coincidir').required("Este campo é obrigatório"),
+    confirmSenha: yup.string().oneOf([yup.ref('senha')], 'As senhas devem coincidir').required("Este campo é obrigatório"),
 });
 
 export default function SingUp() {
-    const navigate = useNavigate();
     const [pages, setPages] = useState("1");
+    const navigate = useNavigate()
 
-    // Escolha o schema de validação baseado na página atual
-    const currentSchema = pages === "1" ? userSchema1 : userSchema2;
+    const currentSchema: unknown = pages === "1" ? userSchema1 : userSchema2;
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver(currentSchema)
+    const { register, handleSubmit, formState: { errors } } = useForm<UserFormDataPage1>({
+        resolver: yupResolver(currentSchema as any),
     });
 
-    // Submissão da primeira página (Nome e Email)
-    const onSubmit1 = (data: any) => {
-        console.log(data);
-        setPages("2");  // Vai para a segunda página
+    const { register: register2, handleSubmit: handleSubmit2, formState: { errors: errors2 }, reset: reset2 } = useForm<UserFormDataPage2>({
+        resolver: yupResolver(currentSchema as any),
+    });
+
+    const onSubmit1 = () => {
+        setPages("2");
     };
 
-    // Submissão da segunda página (Senha e Confirmação)
     const onSubmit2 = (data: any) => {
-        const register = api.post("/signup", {
+        api.post("/signup", {
             nome: data.name,
             email: data.email,
             senha: data.senha
         })
 
-        reset();  // Reseta o formulário
+        reset2();
         setPages("3")
 
     };
@@ -137,27 +149,27 @@ export default function SingUp() {
                     </div>
                     <div className={styles.formAling}>
                         <h1 className={styles.pageTitle}>Escolha uma senha</h1>
-                        <form onSubmit={handleSubmit(onSubmit2)}>
+                        <form onSubmit={handleSubmit2(onSubmit2)}>
                             <Input
-                                error={errors.senha?.message}
-                                {...register("senha")}
+                                error={errors2.senha?.message}
+                                {...register2("senha")}
                                 placeholder={'Digite sua senha'}
                                 type={'password'}
                                 style={{ paddingTop: "30px" }}
                             >
                                 Senha*
                             </Input>
-                            <p className={styles.errorText}>{errors.senha?.message}</p>
+                            <p className={styles.errorText}>{errors2.senha?.message}</p>
                             <Input
-                                error={errors.confirmSenha?.message}
-                                {...register("confirmSenha")}
+                                error={errors2.confirmSenha?.message}
+                                {...register2("confirmSenha")}
                                 placeholder={'Confirme sua senha'}
                                 type={'password'}
                                 style={{ paddingTop: "30px" }}
                             >
                                 Repita a senha*
                             </Input>
-                            <p className={styles.errorText}>{errors.confirmSenha?.message}</p>
+                            <p className={styles.errorText}>{errors2.confirmSenha?.message}</p>
                             <Button
                                 type={'submit'}
                                 style={{ marginTop: "15%", marginLeft: "27%" }}

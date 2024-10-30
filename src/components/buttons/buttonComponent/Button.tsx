@@ -8,7 +8,7 @@ interface ButtonProps {
     type?: 'button' | 'submit' | 'reset'
 }
 
-export const Button: React.FC<ButtonProps> = ({ style, type, children, onClick, onSubmit }) => {
+export const Button: React.FC<ButtonProps> = ({ style, type, children, onClick }) => {
 
     return (
         <button className="customButton" style={style} type={type} onClick={onClick}>

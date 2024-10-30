@@ -14,16 +14,16 @@ export interface IClientsClientesPage {
 }
 
 export interface IClientsForm {
-    nome: string,
-    email: string,
-    cpf: string,
-    telefone: string,
-    endereco: string,
-    complemento: string,
-    cep: string,
-    bairro: string,
-    cidade: string,
-    uf: string
+    nome: string;
+    email: string;
+    cpf: string;
+    telefone: string;
+    endereco?: string;
+    complemento?: string;
+    cep?: string;
+    bairro?: string;
+    cidade?: string;
+    uf?: string;
 }
 
 export interface IClientDetails {

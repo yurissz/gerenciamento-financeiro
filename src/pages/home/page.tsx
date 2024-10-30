@@ -13,7 +13,7 @@ import clientsInadimplentesIcon from '../../assets/home/clienteInadiplenteIcon.p
 import { Cobrancas } from '../../components/cobrancasComponent/Cobrancas'
 import { CobrancasTable } from '../../components/cobrancasTableComponent/CobrancasTable'
 import { HomeClientsTable } from '../../components/homeClientsComponent/HomeClients'
-import { SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import { useNavigate } from 'react-router-dom'
 import { EditAndLogoutModal } from '../../components/buttons/buttonEditAndLogOutUser/EditAndLogoutModal'
@@ -26,12 +26,17 @@ export default function Home() {
     const [isOpenUserButton, setIsOpenUserButton] = useState(false)
     const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false)
     const [isConfirmedEdit, setIsConfirmedEdit] = useState(false)
-    const [userName, setUserName] = useState("")
+    // const [userName, setUserName] = useState("")
 
 
-    let user = localStorage.getItem("user")
-    if (user == null) return
-    user = JSON.parse(user)
+    // interface User {
+    //     id: number;
+    //     nome: string;
+    // }
+
+    // let localStorageUser = localStorage.getItem("user");
+    // if (localStorageUser == null) return
+    // const user = JSON.parse(localStorageUser);
 
     const [clients, setClients] = useState({
         clientesEmdia: {
@@ -70,7 +75,6 @@ export default function Home() {
                 setClients(data)
             }
         } catch (error) {
-            console.log(error);
         }
     }
 
@@ -84,21 +88,20 @@ export default function Home() {
             }
 
         } catch (error) {
-            console.log(error);
         }
     }
 
-    const getUser = async () => {
-        try {
-            const { data } = await api.get(`/userDetails/${user.id}`);
-            console.log(data.user.nome);
-            setUserName(data.user.nome)
+    // const getUser = async () => {
+    //     try {
+    //         const { data } = await api.get(`/userDetails/${user.id}`);
+    //         console.log(data.user.nome);
+    //         setUserName(data.user.nome)
 
-        } catch (error) {
-            console.log(error);
+    //     } catch (error) {
+    //         console.log(error);
 
-        }
-    }
+    //     }
+    // }
 
 
 
@@ -106,7 +109,7 @@ export default function Home() {
 
         getClients()
         getCharges()
-        getUser()
+        // getUser()
     }, [])
 
     return (
@@ -133,7 +136,7 @@ export default function Home() {
                     <section className={styles.alingUserImage} onClick={isOpenUserButton ? () => setIsOpenUserButton(false) : () => setIsOpenUserButton(true)}>
                         <img src={perfilIcon} alt={"perfilIcon"}></img>
                         <div className={styles.alingUserName}>
-                            <p className={styles.styleUserName}>{userName}</p>
+                            <p className={styles.styleUserName}>{"Perfil"}</p>
                             <img src={chevronDown} alt={"chevronDown"}></img>
                         </div>
                         {isOpenUserButton && <EditAndLogoutModal style={{ position: "relative", top: "4em", right: "1em" }} setIsOpen={setIsOpenUserButton} setModalEditUser={setIsOpenModalEditUser}></EditAndLogoutModal>}
