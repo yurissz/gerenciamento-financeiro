@@ -32,12 +32,20 @@ const userSchema1: CurrentSchema = yup.object().shape({
 });
 
 const userSchema2: CurrentSchema = yup.object().shape({
-    senha: yup.string().required("Este campo é obrigatório"),
+    senha: yup.string()
+        .min(8, 'A senha deve ter no mínimo 8 caracteres.')
+        .matches(/[A-Z]/, 'A senha deve conter pelo menos uma letra maiúscula.')
+        .matches(/\d/, 'A senha deve conter pelo menos um número.')
+        .matches(/[@$!%?&]/, 'A senha deve conter pelo menos um dos seguintes símbolos: @, $, !, %, ? ou &.')
+        .required('A senha é obrigatória.'),
     confirmSenha: yup.string().oneOf([yup.ref('senha')], 'As senhas devem coincidir').required("Este campo é obrigatório"),
 });
 
 export default function SingUp() {
     const [pages, setPages] = useState("1");
+    const [name, setName] = useState(undefined)
+    const [email, setEmail] = useState(undefined)
+    //const [senha, setPassword] = useState(undefined)
     const navigate = useNavigate()
 
     const currentSchema: unknown = pages === "1" ? userSchema1 : userSchema2;
@@ -50,20 +58,24 @@ export default function SingUp() {
         resolver: yupResolver(currentSchema as any),
     });
 
-    const onSubmit1 = () => {
+    const onSubmit1 = (data: any) => {
         setPages("2");
+        setName(data.name)
+        setEmail(data.email)
     };
 
     const onSubmit2 = (data: any) => {
-        api.post("/signup", {
-            nome: data.name,
-            email: data.email,
-            senha: data.senha
-        })
-
-        reset2();
-        setPages("3")
-
+        try {
+            api.post("/signup", {
+                nome: name,
+                email: email,
+                senha: data.senha
+            })
+            reset2();
+            setPages("3")
+        } catch (error) {
+            alert('Ocorreu um erro');
+        }
     };
 
     return (
@@ -176,7 +188,9 @@ export default function SingUp() {
                             >
                                 Entrar
                             </Button>
-                            <p className={styles.styleFacaSeuLogin}>Já possui uma conta? Faça seu Login</p>
+                            <p className={styles.styleFacaSeuLogin}>Já possui uma conta? Faça seu <a onClick={() => navigate("/")} className={styles.styleTextLogin}>Login</a>
+
+                            </p>
                         </form>
                         <img src={progressbar2} alt='image2' className={styles.styleProgressBar}></img>
                     </div>

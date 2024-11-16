@@ -17,8 +17,7 @@ export const routes = createBrowserRouter(
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<ProtectedRoutes />}>
-                <Route path="/home"
-                    element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/cobrancas" element={<UserCobrancas />} />
                 <Route path="/clientes" element={<UserClients />} />
                 <Route path="/password" element={<SingUpPassword />} />

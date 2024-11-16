@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { IsignIn } from "../../interfaces/signIn";
 import api from "../../services/api"
+import { useState } from "react";
 
 const schema = yup.object({
     email: yup.string().required('O email é obrigatório'),
@@ -16,6 +17,9 @@ const schema = yup.object({
 
 export default function SingIn() {
     const navigate = useNavigate();
+
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     const {
         register,
@@ -36,12 +40,19 @@ export default function SingIn() {
             if (data) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
+
+                api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
                 console.log(data);
                 navigate('/home');
             }
 
-        } catch (error) {
-            alert('Ocorreu um erro');
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                setErrorMessage('Senha ou e-mail incorretos.');
+            } else {
+                setErrorMessage('Ocorreu um erro. Tente novamente mais tarde.');
+            }
         }
     };
 
@@ -73,6 +84,7 @@ export default function SingIn() {
                         Senha*
                     </Input>
                     <p className={styles.errorText}>{errors.password?.message}</p>
+                    {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
                     <Button
                         type={"submit"}
                         style={{

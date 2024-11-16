@@ -9,7 +9,6 @@ import api from '../../../services/api';
 import { IClientsForm } from '../../../interfaces/clients';
 import ModalInput from '../../inputs/inputForModalsComponent/ModalInput';
 
-// Definindo o esquema de validação com Yup
 const schema = yup.object({
     nome: yup.string().required('O nome é obrigatório'),
     email: yup.string().required('O email é obrigatório').email("O campo deve ser um email"),
@@ -38,11 +37,10 @@ export const ModalEditClient = ({ setIsOpen, clientId }: ModalProps) => {
         resolver: yupResolver(schema),
     });
 
-    // Função para lidar com o envio do formulário
     const handleForm = async (inputValue: IClientsForm) => {
         try {
             await api.put(`/updateClient/${clientId}`, inputValue);
-            setIsOpen(false); // Fecha o modal após a atualização
+            setIsOpen(false);
         } catch (error) {
             alert('Ocorreu um erro ao atualizar o cliente');
         }

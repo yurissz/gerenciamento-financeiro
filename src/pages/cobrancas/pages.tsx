@@ -21,21 +21,11 @@ export default function UserCobrancas() {
     const [isOpenUserButton, setIsOpenUserButton] = useState(false)
     const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false)
     const [isConfirmedEdit, setIsConfirmedEdit] = useState(false)
-    // const [userName, setUserName] = useState("")
     const [isOpenDescriptionChargeModal, setIsOpenDescriptionChargeModal] = useState(false)
 
     const [idCob, setIdCob] = useState("")
     const [isOpenEditCharge, setIsOpenEditCharge] = useState(false)
     const [isOpenDeleteAlart, setIsOpenDeleteAlart] = useState(false)
-
-    // interface User {
-    //     id: number;
-    //     nome: string;
-    // }
-
-    // let localStorageUser = localStorage.getItem("user");
-    //if (localStorageUser == null) return;
-    // const user: User = JSON.parse(localStorageUser);
 
 
     const [charges, setCharges] = useState([
@@ -64,21 +54,8 @@ export default function UserCobrancas() {
         }
     }
 
-    // const getUser = async () => {
-    //     try {
-    //         const { data } = await api.get(`/userDetails/${user.id}`);
-    //         setUserName(data.user.nome)
-
-    //     } catch (error) {
-
-    //     }
-    // }
-
     useEffect(() => {
         getCharges()
-        // getUser()
-        console.log("oi");
-
 
     }, [isOpenModalEditUser, isConfirmedEdit, isOpenDeleteAlart, isOpenEditCharge])
 

@@ -18,7 +18,7 @@ export interface IChargesCobrancasPage {
 
 export interface IAddCharge {
     descricao: string;
-    data_venc: string; // Mantenha como string
+    data_venc: string;
     valor: string;
     status: string;
 }

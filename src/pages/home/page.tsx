@@ -26,17 +26,6 @@ export default function Home() {
     const [isOpenUserButton, setIsOpenUserButton] = useState(false)
     const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false)
     const [isConfirmedEdit, setIsConfirmedEdit] = useState(false)
-    // const [userName, setUserName] = useState("")
-
-
-    // interface User {
-    //     id: number;
-    //     nome: string;
-    // }
-
-    // let localStorageUser = localStorage.getItem("user");
-    // if (localStorageUser == null) return
-    // const user = JSON.parse(localStorageUser);
 
     const [clients, setClients] = useState({
         clientesEmdia: {
@@ -91,25 +80,10 @@ export default function Home() {
         }
     }
 
-    // const getUser = async () => {
-    //     try {
-    //         const { data } = await api.get(`/userDetails/${user.id}`);
-    //         console.log(data.user.nome);
-    //         setUserName(data.user.nome)
-
-    //     } catch (error) {
-    //         console.log(error);
-
-    //     }
-    // }
-
-
 
     useEffect(() => {
-
         getClients()
         getCharges()
-        // getUser()
     }, [])
 
     return (

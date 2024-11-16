@@ -40,7 +40,7 @@ export const ModalRegisterClient = ({ setIsOpen }: ModalProps) => {
 
     const handleForm = async (inputValue: IClientsForm) => {
         try {
-            await api.post('/registerClient', {
+            api.post('/registerClient', {
                 nome: inputValue.nome,
                 email: inputValue.email,
                 cpf: inputValue.cpf,
