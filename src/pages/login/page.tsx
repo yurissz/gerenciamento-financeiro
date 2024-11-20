@@ -8,7 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { IsignIn } from "../../interfaces/signIn";
 import api from "../../services/api"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Loader } from "../../components/Loader";
+import React from "react";
 
 const schema = yup.object({
     email: yup.string().required('O email é obrigatório'),
@@ -19,6 +21,8 @@ export default function SingIn() {
     const navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(true)
+    const [submited, setSubmited] = useState(true)
 
 
     const {
@@ -29,9 +33,14 @@ export default function SingIn() {
         resolver: yupResolver(schema),
     });
 
+    useEffect(() => {
+        setLoading(!loading)
+    }, [submited])
+
 
     const handleFormSignIn = async (inputValue: IsignIn) => {
         try {
+            setSubmited(!submited)
             const { data } = await api.post('/login', {
                 email: inputValue.email,
                 senha: inputValue.password,
@@ -42,12 +51,12 @@ export default function SingIn() {
                 localStorage.setItem('user', JSON.stringify(data.user));
 
                 api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-
-                console.log(data);
+                setLoading(loading)
                 navigate('/home');
             }
 
         } catch (error: any) {
+            setLoading(loading)
             if (error.response?.status === 401) {
                 setErrorMessage('Senha ou e-mail incorretos.');
             } else {
@@ -59,6 +68,7 @@ export default function SingIn() {
     return (
         <section className={styles.screenBackground}>
             <img src={pictureLogin} alt={'pictureLogin'} className={styles.alingPicture}></img>
+
             <div className={styles.formAling}>
                 <h1 className={styles.pageTitle}>Faça seu login!</h1>
                 <form onSubmit={handleSubmit(handleFormSignIn)}>
@@ -85,13 +95,15 @@ export default function SingIn() {
                     </Input>
                     <p className={styles.errorText}>{errors.password?.message}</p>
                     {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
-                    <Button
-                        type={"submit"}
-                        style={{
-                            marginTop: "15%",
-                            marginLeft: "27%"
-                        }}>Entrar</Button>
-
+                    {
+                        loading ? <Loader /> :
+                            <Button
+                                type={"submit"}
+                                style={{
+                                    marginTop: "15%",
+                                    marginLeft: "27%"
+                                }}>Entrar</Button>
+                    }
                     <p className={styles.styleFacaSeuLogin}>Ainda não possui conta? <a onClick={() => navigate("/register")} className={styles.styleTextLogin}>Cadastre-se</a></p>
                 </form>
             </div>
