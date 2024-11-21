@@ -10,7 +10,6 @@ import { IsignIn } from "../../interfaces/signIn";
 import api from "../../services/api"
 import { useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
-import React from "react";
 
 const schema = yup.object({
     email: yup.string().required('O email é obrigatório'),
