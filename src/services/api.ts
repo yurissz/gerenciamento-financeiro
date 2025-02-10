@@ -3,7 +3,7 @@ import axios from 'axios';
 const token = localStorage.getItem('token');
 
 const api = axios.create({
-    baseURL: 'https://desafio-front-modulo4-next-parteback-v3-aimz.onrender.com',
+    baseURL: 'https://desafio-front-modulo4-next-parteback-v3-psti.onrender.com',
     headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
