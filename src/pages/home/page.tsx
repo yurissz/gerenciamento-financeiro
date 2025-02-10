@@ -3,7 +3,7 @@ import { formatarParaReais } from '../../utils/formatToReais'
 import selectionedHouseIcon from '../../assets/home/selectionedHouseIcon.png'
 import clientsIcon from '../../assets/home/clientsIcon.png'
 import pastIcon from '../../assets/home/pastIcon.png'
-import perfilIcon from '../../assets/home/perfilIcon.png'
+import perfilIcon from '../../../public/iconperfil.png'
 import chevronDown from '../../assets/home/chevron-down.png'
 import cobrancaPagaIcon from '../../assets/home/cobrancaPagaIcon.png'
 import cobrancaPendenteIcon from '../../assets/home/cobrancaPendenteIcon.png'
@@ -108,7 +108,7 @@ export default function Home() {
                 <header className={styles.alingHeader}>
                     <h1 className={styles.pageTitle}>Resumo das cobranças</h1>
                     <section className={styles.alingUserImage} onClick={isOpenUserButton ? () => setIsOpenUserButton(false) : () => setIsOpenUserButton(true)}>
-                        <img src={perfilIcon} alt={"perfilIcon"}></img>
+                        <img src={perfilIcon} alt={"perfilIcon"} style={{ width: 50, height: 50 }}></img>
                         <div className={styles.alingUserName}>
                             <p className={styles.styleUserName}>{"Perfil"}</p>
                             <img src={chevronDown} alt={"chevronDown"}></img>

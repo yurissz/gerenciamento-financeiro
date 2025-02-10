@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 import houseIcon from '../../assets/home/houseIcon.png'
 import clientsIcon from '../../assets/clients/clientsSelected.png'
-import perfilIcon from '../../assets/home/perfilIcon.png'
+import perfilIcon from '../../../public/iconperfil.png'
 import chevronDown from '../../assets/home/chevron-down.png'
 import filter from '../../assets/cobrancas/filter.png'
 import search from '../../assets/cobrancas/search.png'
@@ -177,7 +177,7 @@ export default function UserClients() {
                     <header className={styles.alingHeader}>
                         <h1 className={styles.pageTitle}>Clientes</h1>
                         <section className={styles.alingUserImage} onClick={isOpenUserButton ? () => setIsOpenUserButton(false) : () => setIsOpenUserButton(true)}>
-                            <img src={perfilIcon} alt={"perfilIcon"}></img>
+                            <img src={perfilIcon} alt={"perfilIcon"} style={{ width: 50, height: 50 }}></img>
                             <div className={styles.alingUserName}>
                                 <p className={styles.styleUserName}>{"Perfil"}</p>
                                 <img src={chevronDown} alt={"chevronDown"}></img>
@@ -222,7 +222,7 @@ export default function UserClients() {
                     <header className={styles.alingHeader}>
                         <h1 className={styles.pageTitle}>Clientes</h1>
                         <section className={styles.alingUserImage} onClick={isOpenUserButton ? () => setIsOpenUserButton(false) : () => setIsOpenUserButton(true)}>
-                            <img src={perfilIcon} alt={"perfilIcon"}></img>
+                            <img src={perfilIcon} alt={"perfilIcon"} style={{ width: 50, height: 50 }}></img>
                             <div className={styles.alingUserName}>
                                 <p className={styles.styleUserName}>{"Perfil"}</p>
                                 <img src={chevronDown} alt={"chevronDown"}></img>

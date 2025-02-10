@@ -18,7 +18,7 @@ export const ModalDeleteCharge: React.FC<CobrancasProps> = ({ id_cob, setIsOpen 
         try {
             await api.delete(`/deleteCharge/${id_cob}`)
         } catch (error) {
-
+            console.log(error);
         }
     }
 
